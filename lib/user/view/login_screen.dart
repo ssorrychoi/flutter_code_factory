@@ -104,19 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   width: double.infinity,
                   child: TextButton(
-                    onPressed: () async {
-                      final result = await dio.post(
-                        'http://$ip/auth/token',
-                        options: Options(
-                          headers: {
-                            'authorization':
-                                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAY29kZWZhY3RvcnkuYWkiLCJzdWIiOiJmNTViMzJkMi00ZDY4LTRjMWUtYTNjYS1kYTlkN2QwZDkyZTUiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTY4MDEwMzAxMSwiZXhwIjoxNjgwMTg5NDExfQ.KiwlPsFccnDmG5XsHoxiTJhNGOltIr30jQ3OYQRPgIc',
-                          },
-                        ),
-                      );
-
-                      print(result.data);
-                    },
+                    onPressed: () async {},
                     style: TextButton.styleFrom(primary: Colors.black),
                     child: Text('회원가입'),
                   ),
