@@ -15,7 +15,7 @@ class RestaurantModel {
   final double ratings;
   final num ratingsCount;
   final num deliveryTime;
-  final num delieveryFee;
+  final num deliveryFee;
 
   RestaurantModel({
     required this.id,
@@ -26,7 +26,7 @@ class RestaurantModel {
     required this.ratings,
     required this.ratingsCount,
     required this.deliveryTime,
-    required this.delieveryFee,
+    required this.deliveryFee,
   });
 
   factory RestaurantModel.fromJson({
@@ -42,7 +42,7 @@ class RestaurantModel {
       ratings: json['ratings'],
       ratingsCount: json['ratingsCount'],
       deliveryTime: json['deliveryTime'],
-      delieveryFee: json['deliveryFee'],
+      deliveryFee: json['deliveryFee'],
     );
   }
 }

@@ -30,6 +30,7 @@ class DefaultLayout extends StatelessWidget {
     } else {
       return AppBar(
         backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0,
         title: Text(
           title!,
