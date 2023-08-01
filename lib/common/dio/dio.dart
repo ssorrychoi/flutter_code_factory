@@ -1,6 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_code_factory/common/const/data.dart';
+import 'package:flutter_code_factory/common/secure_storage/secure_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+final dioProvider = Provider<Dio>(
+  (ref) {
+    final dio = Dio();
+
+    final storage = ref.watch(secureStorageProvider);
+
+    dio.interceptors.add(CustomInterceptor(storage: storage));
+
+    return dio;
+  },
+);
 
 class CustomInterceptor extends Interceptor {
   final FlutterSecureStorage storage;
@@ -9,8 +23,7 @@ class CustomInterceptor extends Interceptor {
 
 // 1. request
   @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     // TODO: implement onRequest
 
     print('[REQ] [${options.method}] ${options.uri}');
@@ -30,8 +43,7 @@ class CustomInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     // TODO: implement onResponse
-    print(
-        '[RES] [${response.requestOptions.method}] ${response.requestOptions.uri}');
+    print('[RES] [${response.requestOptions.method}] ${response.requestOptions.uri}');
     return super.onResponse(response, handler);
   }
 
