@@ -11,6 +11,7 @@ class RestaurantCard extends StatelessWidget {
   final num deliveryTime;
   final num deliveryFee;
   final num ratings;
+  final String? heroKey;
   final bool isDetail;
   final String? detail;
 
@@ -23,6 +24,7 @@ class RestaurantCard extends StatelessWidget {
     required this.deliveryTime,
     required this.deliveryFee,
     required this.ratings,
+    this.heroKey,
     this.isDetail = false,
     this.detail,
   });
@@ -41,6 +43,7 @@ class RestaurantCard extends StatelessWidget {
       ratingsCount: model.ratingsCount,
       deliveryTime: model.deliveryTime,
       deliveryFee: model.deliveryFee,
+      heroKey: model.id,
       ratings: model.ratings,
       isDetail: isDetail,
       detail: model is RestaurantDetailModel ? model.detail : null,
@@ -52,10 +55,17 @@ class RestaurantCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (isDetail) image,
-        if (!isDetail)
+        if (heroKey != null)
+          Hero(
+            tag: ObjectKey(heroKey),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(isDetail ? 0 : 12.0),
+              child: image,
+            ),
+          ),
+        if (heroKey == null)
           ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(isDetail ? 0 : 12.0),
             child: image,
           ),
         const SizedBox(height: 16.0),
@@ -105,8 +115,7 @@ class RestaurantCard extends StatelessWidget {
         ),
         if (detail != null && isDetail)
           Container(
-            padding:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
             child: Text(detail!),
           ),
       ],
